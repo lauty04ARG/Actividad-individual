@@ -7,6 +7,8 @@
 # Material de cátedra / Plantillas locales de trabajo
 # ------------------------------------------------------------------------------
 GUIATP/
+boveda_TPindividual/
+.obsidian/
 
 # ------------------------------------------------------------------------------
 # Frontend (React 19, Vite, pnpm)
