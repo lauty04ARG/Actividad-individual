@@ -2,9 +2,33 @@
 
 > WebApp de gestión de comunidad de cursos: catálogo comunitario de cursos gratuitos y validados + roadmaps personales de aprendizaje.
 >
-> **Estado:** 📚 Documentación (Instancia A) — Desarrollo de código fuente pendiente de aprobación docente.
+> **Estado:** 🚧 En Desarrollo (Instancia B — Scaffold Mínimo) — Rama de integración: `dev`.
 
 **Stack Tecnológico:** React 19 + Vite + pnpm · FastAPI + uv · PostgreSQL 18.6 · Docker Compose (dev)
+
+---
+
+## Cómo Levantar el Entorno de Desarrollo (Inicio Rápido)
+
+Instrucciones verificables para ejecutar en una máquina limpia:
+
+```bash
+# 1. Clonar el repositorio y situarse en la carpeta
+git clone https://github.com/lauty04ARG/Actividad-individual.git
+cd Actividad-individual
+
+# 2. Crear archivo de variables de entorno a partir de la plantilla
+cp .env.example .env
+
+# 3. Levantar los 3 servicios orquestados con Docker Compose (dev)
+docker compose up
+```
+
+### URLs de Verificación y Servicios
+- **Frontend SPA (Vite + React 19):** `http://localhost:5173`
+- **Backend Health Check (FastAPI):** `http://localhost:8000/health`
+- **Documentación Interactiva Swagger / OpenAPI:** `http://localhost:8000/docs`
+- **Base de Datos PostgreSQL 18.6:** `localhost:5432`
 
 ---
 
@@ -34,7 +58,6 @@ La especificación completa del sistema se encuentra organizada en los 7 documen
 
 - **Renderizado nativo:** Todos los archivos `.md` y diagramas de Mermaid (`erDiagram`, `flowchart`, `sequenceDiagram`, `stateDiagram-v2`) se renderizan de forma interactiva y legible directamente en la interfaz web de GitHub.
 - **Vista previa local en VS Code:** Abrir cualquier archivo de la carpeta `docs/` y presionar `Ctrl + Shift + V` (o extensión *Markdown All in One*).
-- **Gate de Aprobación de la Instancia A:** Siguiendo las reglas de la cátedra, este repositorio **no contiene código fuente** (`.py`, `.js`, `.tsx`, `node_modules`, `.venv`, etc.). Todo el código arrancará en la Instancia B una vez obtenida la aprobación formal.
 
 ---
 
@@ -42,36 +65,17 @@ La especificación completa del sistema se encuentra organizada en los 7 documen
 
 | Instancia | Contenido y Alcance | Estado Actual |
 |-----------|---------------------|:-------------:|
-| **Instancia A — Documentación** | Repositorio GitHub + 7 documentos normativos + `.gitignore` + `README.md` | ✅ **Completada y Lista para Revisión** |
-| **Instancia B — Desarrollo del MVP** | Ejecución del Implementation Plan (historias P0 en Docker Compose) | ⏳ Pendiente de Aprobación Docente |
+| **Instancia A — Documentación** | Repositorio GitHub + 7 documentos normativos + `.gitignore` + `README.md` | ✅ Aprobada formalmente por el docente |
+| **Instancia B — Desarrollo del MVP** | Ejecución de tickets de desarrollo (T1 a T5 para scaffold mínimo) | 🟡 **En desarrollo activo en rama `dev`** |
 | **Instancia C — Clase del 27/10** | Testing unitario e integración, Docker multi-stage y gestión del cambio | ⏳ Planificada |
 
 ---
 
 ## Versionado y Flujo de Git
 
-- **Flujo elegido:** **GitHub Flow** con ramas temáticas (`docs/spec-and-prd`, `docs/ux-and-flows`, `docs/architecture-and-schema`, `docs/plan-and-readme`) integradas a `main` mediante `git merge --no-ff` (o Pull Requests) para preservar la trazabilidad del árbol de trabajo.
-- **Convención de commits:** **Conventional Commits** al 100% de la historia (`docs:`, `feat:`, `fix:`, `refactor:`, `chore:`). Prohibidos los commits genéricos.
-- **Evolución evidenciada:** El commit inicial preserva la `SPEC.md` original de clase sin modificar, mostrando en commits posteriores el refinamiento y la resolución de vacíos.
-
----
-
-## Instrucciones Previstas para la Instancia B
-
-Una vez recibida la aprobación del docente y habilitado el inicio de la Instancia B, el proyecto levantará en cualquier entorno limpio con:
-
-```bash
-# 1. Clonar el repositorio
-git clone https://github.com/lauty04ARG/Actividad-individual.git
-cd Actividad-individual
-
-# 2. Levantar la aplicación completa con Docker Compose
-docker compose up --build
-```
-
-- **Frontend:** `http://localhost:5173`
-- **Backend API Docs (Swagger / OpenAPI):** `http://localhost:8000/docs`
-- **PostgreSQL 18.6:** `localhost:5432`
+- **Flujo de ramas:** GitFlow simplificado con rama `main` reservada exclusivamente para releases etiquetadas (`vX.Y.Z`) y rama `dev` como integradora de desarrollo.
+- **Ramas de tickets:** Creadas desde `dev` bajo el patrón `feat/T{N}-nombre-ticket` y mergeadas a `dev`.
+- **Convención de commits:** **Conventional Commits** al 100% de la historia (`chore:`, `feat:`, `docs:`, `docker:`).
 
 ---
 
