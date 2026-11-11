@@ -8,27 +8,41 @@
 
 ---
 
-## Cómo Levantar el Entorno de Desarrollo (Inicio Rápido)
+## Cómo Levantar el Entorno de Desarrollo (Instrucciones en Máquina Limpia)
 
-Instrucciones verificables para ejecutar en una máquina limpia:
+Requisitos previos: tener instalados **Git** y **Docker Desktop** (con Docker Compose v2 habilitado).
 
 ```bash
-# 1. Clonar el repositorio y situarse en la carpeta
+# 1. Clonar el repositorio y situarse en la raíz del proyecto
 git clone https://github.com/lauty04ARG/Actividad-individual.git
 cd Actividad-individual
 
-# 2. Crear archivo de variables de entorno a partir de la plantilla
+# 2. Configurar las variables de entorno desde la plantilla
 cp .env.example .env
 
-# 3. Levantar los 3 servicios orquestados con Docker Compose (dev)
-docker compose up
+# 3. Levantar los 3 servicios con Docker Compose en modo desarrollo
+docker compose up --build
 ```
 
 ### URLs de Verificación y Servicios
-- **Frontend SPA (Vite + React 19):** `http://localhost:5173`
-- **Backend Health Check (FastAPI):** `http://localhost:8000/health`
-- **Documentación Interactiva Swagger / OpenAPI:** `http://localhost:8000/docs`
-- **Base de Datos PostgreSQL 18.6:** `localhost:5432`
+- **Frontend SPA (React 19 + Vite + pnpm):** [http://localhost:5173](http://localhost:5173) (muestra el catálogo comunitario consumiendo la API).
+- **Backend Health Check (FastAPI + uv):** [http://localhost:8000/health](http://localhost:8000/health) (responde `{"status": "ok", ...}`).
+- **Documentación Interactiva Swagger / OpenAPI:** [http://localhost:8000/docs](http://localhost:8000/docs).
+- **Base de Datos PostgreSQL 18.6:** `localhost:5432` (con persistencia en volumen `comunidad_cursos_postgres_data`).
+
+### Verificación por Consola (Smoke Test)
+```bash
+# Verificar respuesta de salud del backend
+curl http://localhost:8000/health
+
+# Verificar endpoint de catálogo con paginación
+curl "http://localhost:8000/api/v1/cursos?page=1&page_size=10"
+```
+
+### Detener los Contenedores
+```bash
+docker compose down
+```
 
 ---
 
