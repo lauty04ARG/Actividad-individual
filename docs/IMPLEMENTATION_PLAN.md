@@ -12,7 +12,8 @@ El MVP de la **Instancia B** se considerará formalmente **hecho y aprobado** cu
 ```bash
 git clone https://github.com/lauty04ARG/Actividad-individual.git
 cd Actividad-individual
-docker compose up
+cp .env.example .env
+docker compose up --build
 ```
 
 Y sea posible recorrer de punta a punta desde el navegador web (`http://localhost:5173`) las **5 Historias de Usuario P0** del PRD sin errores en consola ni en backend:
@@ -45,14 +46,14 @@ flowchart LR
 
 ## 3. Detalle por Módulos y Tareas
 
-### M0 — Scaffold e Infraestructura de Desarrollo
+### M0 — Scaffold e Infraestructura de Desarrollo (Completado en Release v0.1.0)
 
-| # | Tarea | Definición de Hecho (DoD) Verificable | Estimación |
-|---|-------|---------------------------------------|------------|
-| **0.1** | Creación del árbol de directorios Screaming Architecture | Las carpetas por dominio (`courses/`, `roadmaps/`, `auth/`, etc.) existen en `backend/` y `frontend/` respetando el TRD §3.2. | 30 min |
-| **0.2** | Orquestación Docker Compose dev | `docker compose up postgres` inicia PostgreSQL 18.6 en el puerto 5432 y persiste datos en el volumen `postgres_data`. | 45 min |
-| **0.3** | Inicialización de Backend FastAPI con uv | Contenedor backend levanta con hot-reload; `curl http://localhost:8000/health` responde `{ "status": "ok" }`. | 1 h |
-| **0.4** | Inicialización de Frontend Vite + React 19 con pnpm | Contenedor frontend levanta; al acceder a `http://localhost:5173` se renderiza el Shell básico con Header sticky y menú sándwich. | 1 h |
+| # | Tarea | Definición de Hecho (DoD) Verificable | Estimación | Estado |
+|---|-------|---------------------------------------|:----------:|:------:|
+| **0.1** | Creación del árbol de directorios Screaming Architecture | Las carpetas por dominio (`courses/`, `roadmaps/`, `auth/`, etc.) existen en `backend/` y `frontend/` respetando el TRD §3.2. | 30 min | ✅ `[x]` |
+| **0.2** | Orquestación Docker Compose dev | `docker compose up postgres` inicia PostgreSQL 18.6 en el puerto 5432 y persiste datos en el volumen `postgres_data`. | 45 min | ✅ `[x]` |
+| **0.3** | Inicialización de Backend FastAPI con uv | Contenedor backend levanta con hot-reload; `curl http://localhost:8000/health` responde `{ "status": "ok" }`. | 1 h | ✅ `[x]` |
+| **0.4** | Inicialización de Frontend Vite + React 19 con pnpm | Contenedor frontend levanta; al acceder a `http://localhost:5173` se renderiza el Shell con catálogo consumiendo la API. | 1 h | ✅ `[x]` |
 
 ---
 
@@ -103,14 +104,12 @@ flowchart LR
 
 ## 4. Matriz de Seguimiento para la Instancia B
 
-> Esta matriz se irá completando a medida que se ejecuten las tareas durante la etapa de desarrollo:
-
 | Módulo | Tarea | Descripción | Estado | Rama / Commit Asociado |
 |:------:|:-----:|-------------|:------:|:----------------------:|
-| M0 | 0.1 | Estructura de carpetas Screaming Architecture | `[ ]` | — |
-| M0 | 0.2 | Docker Compose con PostgreSQL 18.6 | `[ ]` | — |
-| M0 | 0.3 | Backend FastAPI con endpoint `/health` | `[ ]` | — |
-| M0 | 0.4 | Frontend Vite + React 19 con Shell y Header | `[ ]` | — |
+| M0 | 0.1 | Estructura de carpetas Screaming Architecture | `[x]` | `feat/T1-scaffold-estructura` (`4dc52ac`) |
+| M0 | 0.2 | Docker Compose con PostgreSQL 18.6 | `[x]` | `feat/T4-docker-compose-dev` (`bb1aacb`) |
+| M0 | 0.3 | Backend FastAPI con endpoint `/health` y `/cursos` | `[x]` | `feat/T2-backend-minimo` (`f0b7867`, `9b86e8b`) |
+| M0 | 0.4 | Frontend Vite + React 19 con Catálogo y Estilos | `[x]` | `feat/T3-frontend-minimo` (`81b2364`, `10d9136`) |
 | M1 | 1.1 | Modelo y tabla de usuarios | `[ ]` | — |
 | M1 | 1.2 | Registro y login con bcrypt y JWT | `[ ]` | — |
 | M1 | 1.3 | Rate limiting en login (5 req/min) | `[ ]` | — |

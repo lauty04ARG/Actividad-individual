@@ -1,0 +1,213 @@
+/* ==============================================================================
+   Estilos Globales y Estrategia Mobile-First
+   Definidos formalmente en docs/UX-UI.md §3 y §4
+   ============================================================================== */
+
+@import './variables.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header Sticky con elevación sutil */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-3) var(--space-4);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.site-logo {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.site-badge {
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
+  background-color: var(--color-primary-container);
+  color: var(--color-primary-dark);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+/* Contenedor principal con gutters */
+.main-content {
+  width: 100%;
+  padding: var(--space-4);
+  margin: 0 auto;
+}
+
+/* Base Mobile-First: Grilla de 1 sola columna sin Media Queries */
+.courses-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+/* Tarjeta de Curso (Course Card) */
+.course-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+.course-category {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.course-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+.course-meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* Badges de Metadatos */
+.badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.badge {
+  font-size: var(--text-xs);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: #e6f4ea;
+  color: var(--color-success);
+}
+
+.badge-info {
+  background-color: var(--color-primary-container);
+  color: var(--color-primary-dark);
+}
+
+/* Botones Accesibles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px; /* Target táctil accesible */
+  padding: 10px 20px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-hover-grey);
+}
+
+/* Estados de Carga, Error y Vacío */
+.state-box {
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-6);
+  text-align: center;
+  margin: var(--space-5) 0;
+}
+
+.state-loading {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.state-error {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+/* ==============================================================================
+   Mejora Progresiva con Media Queries
+   ============================================================================== */
+
+/* Tablet: Grilla de 2 columnas */
+@media (min-width: 768px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: Grilla de 3 columnas y contenedor centrado */
+@media (min-width: 1024px) {
+  .main-content {
+    max-width: 1140px;
+    padding: var(--space-5) 0;
+  }
+  .courses-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
