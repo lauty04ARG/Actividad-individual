@@ -35,24 +35,6 @@ services:
     networks:
       - app_network
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: comunidad_cursos_frontend
-    restart: unless-stopped
-    environment:
-      VITE_BACKEND_URL: http://backend:8000
-    ports:
-      - "${FRONTEND_PORT:-5173}:5173"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    depends_on:
-      - backend
-    networks:
-      - app_network
-
 volumes:
   postgres_data:
     name: comunidad_cursos_postgres_data
