@@ -3,7 +3,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Habilitar e inicializar pnpm usando corepack de Node.js
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9 --activate
 
 # Copiar especificación de paquetes
 COPY package.json ./
