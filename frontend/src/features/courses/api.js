@@ -25,3 +25,28 @@ export async function getCourses({ page = 1, pageSize = 10, categoriaId = null, 
 
   return await response.json()
 }
+
+export async function getCategories() {
+  const response = await fetch('/api/v1/cursos/categorias')
+  if (!response.ok) {
+    throw new Error(`Error al cargar categorías (HTTP ${response.status})`)
+  }
+  return await response.json()
+}
+
+export async function createCourse(courseData) {
+  const response = await fetch('/api/v1/cursos', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(courseData),
+  })
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}))
+    throw new Error(errorData.detail || `Error al crear curso (HTTP ${response.status})`)
+  }
+
+  return await response.json()
+}
