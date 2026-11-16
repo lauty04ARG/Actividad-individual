@@ -18,6 +18,11 @@ class CourseBase(BaseModel):
     declare_que_lo_tomo: bool = Field(..., description="Declaración obligatoria de si el autor cursó el contenido")
 
 
+class CourseCreate(CourseBase):
+    """Esquema para aporte o creación de un nuevo curso."""
+    estado: Optional[str] = Field("publicado", description="Estado inicial del curso (publicado o en_revision)")
+
+
 class CourseResponse(CourseBase):
     """Esquema de respuesta pública de curso en catálogo."""
     id: int
@@ -27,6 +32,13 @@ class CourseResponse(CourseBase):
     model_config = {
         "from_attributes": True
     }
+
+
+class CategoriaResponse(BaseModel):
+    """Esquema para categorías de cursos."""
+    id: int
+    nombre: str
+    descripcion: Optional[str] = None
 
 
 class CoursePaginationResponse(BaseModel):
